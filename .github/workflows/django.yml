@@ -1,6 +1,6 @@
 name: Aplicação Django
 
-on: [pull_request]
+on: [push]
 jobs:
   build:
     env:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: action/checkout@v2
+      - uses: action/checkout@v3
       - name: Set up Python 3.10
         uses: actions/setup-python@v1
         with:
