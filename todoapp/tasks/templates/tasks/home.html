@@ -17,9 +17,24 @@
                             <input type="text" class="form-control" placeholder="Describe the task"
                                     aria-label="Describe the task" aria-describedby="button-addon2" name="name">
                             <button class="btn btn-primary" type="submit" id="button-addon2">Save</button>
+                            
                         </div>
+                        <small class="form-text text-muted">{{form.name.errors}}</small>
                           
                     </form>
+
+                    <h2 class="mt-5"> Pending Tasks List </h2>
+                    {% for task in pending_tasks %}
+                        <form action="">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                  {{task.name}}
+                                </label>
+                            </div>
+                        </form>
+                    {% endfor %}
+                      
                 </div>
             </div>
 
