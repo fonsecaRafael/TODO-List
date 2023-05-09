@@ -30,8 +30,16 @@ def home(request):
 
 
 def detail(request, task_id):
-    task = Tasks.objects.get(id=task_id)
-    form = TaskForm(request.POST, instance=task)
-    if form.is_valid():
-        form.save()
+    if request.method == 'POST':
+        task = Tasks.objects.get(id=task_id)
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+
+    return HttpResponseRedirect(reverse('tasks:home'))
+
+
+def delete(request, task_id):
+    if request.method == 'POST':
+        Tasks.objects.filter(id=task_id).delete()
     return HttpResponseRedirect(reverse('tasks:home'))
