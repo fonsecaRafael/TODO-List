@@ -8,3 +8,10 @@ class NewTaskForm(ModelForm):
     class Meta:
         model = Tasks
         fields = ['name']
+
+
+class TaskForm(ModelForm):
+
+    class Meta:
+        model = Tasks
+        fields = ['name', 'done']

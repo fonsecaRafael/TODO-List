@@ -31,10 +31,26 @@ def pending_tasks_list(db):
 
 
 @pytest.fixture
-def response_tasks_list(client: Client, pending_tasks_list):
+def done_tasks_list(db):
+    tasks = [
+        Tasks(name='Task 3', done=True),
+        Tasks(name='Task 4', done=True),
+    ]
+
+    Tasks.objects.bulk_create(tasks)
+    return tasks
+
+
+@pytest.fixture
+def response_tasks_list(client: Client, pending_tasks_list, done_tasks_list):
     return client.get(reverse('tasks:home'))
 
 
 def test_pending_tasks_list_is_present(response_tasks_list, pending_tasks_list):
     for task in pending_tasks_list:
+        assertContains(response_tasks_list, task.name)
+
+
+def test_done_tasks_list_is_present(response_tasks_list, done_tasks_list):
+    for task in done_tasks_list:
         assertContains(response_tasks_list, task.name)
