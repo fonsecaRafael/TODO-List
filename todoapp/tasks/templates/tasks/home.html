@@ -40,21 +40,30 @@
 
                     <h2 class="mt-5"> Done Tasks List </h2>
                     {% for task in done_tasks %}
-                        <form action="{% url 'tasks:detail' task_id=task.id %}" method="post">
-                            {% csrf_token %}
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" value="{{task.name}}" required="required"
-                                aria-label="Describe the task" name="name">
-
-                                <button class="btn btn-warning" type="submit">Marcar como pendente</button>
-                                
+                        <div class="row">
+                            <div class="col-2">
+                                <form action="{% url 'tasks:delete' task_id=task.id %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="input-group mb-3">
+                                        <button class="btn btn-danger" type="submit">Apagar</button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                            <div class="col-10">
+                                <form action="{% url 'tasks:detail' task_id=task.id %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" value="{{task.name}}" required="required"
+                                        aria-label="Describe the task" name="name">
+        
+                                        <button class="btn btn-warning" type="submit">Marcar como pendente</button>
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     {% endfor %}
-                      
                 </div>
             </div>
-
-
     </body>
 </html>
